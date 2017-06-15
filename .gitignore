@@ -1,0 +1,5 @@
+# User files.
+.bash_history
+.gitconfig
+.ssh
+.DS_Store

@@ -1,0 +1,28 @@
+{% extends "_layout" %}
+{% block content %}
+{% set phone_error   = craft.session.getFlash('phone') %}
+{% set message_error = craft.session.getFlash('message') %}
+{% set user_number   = craft.session.getFlash('user_number') %}
+{% set user_message  = craft.session.getFlash('user_message') %}
+<div id="sms-status-container">
+  {% if phone_error or message_error %}
+    <ul class="errors">
+      {% if phone_error %}
+        <li>{{ phone_error }}</li>
+      {% endif %}
+      {% if message_error %}
+        <li>{{ message_error }}</li>
+      {% endif %}
+    </ul>
+  {% endif %}
+
+  <div id="sms-status" class="alert" style="display: none"></div>
+</div>
+<form id="sms-form" method="post" action="" accept-charset="UTF-8">
+  {{ getCsrfInput() }}
+  <input type="hidden" name="action" value="twilioSms/Sms/sendSms" />
+  <textarea id="sms-message" class="form-control" name="sms_message" placeholder="Your Message">{{ user_message }}</textarea>
+  <input type="tel" id="sms-number" class="form-control" name="sms_user_phone" placeholder="Your Number" value="{{ user_number }}" />
+  <input type="submit" id="sms-submit" value="Send" />
+</form>
+{% endblock %}

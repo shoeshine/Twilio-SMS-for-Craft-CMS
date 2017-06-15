@@ -1,0 +1,162 @@
+<h1>Receive texts via Twilio from your site visitors.</h1>
+{% import "_includes/forms" as forms %}
+{{
+  forms.textField({
+    label: "Twilio Number:"|t,
+    required: true,
+    id: 'from',
+    name: 'from',
+    instructions: "Use either your Twilio number or a Twilio verified caller ID number, including country code."|t,
+    value: settings.from,
+    placeholder: '+12345556789',
+    errors: settings.getErrors('from')
+  })
+}}
+
+{{
+  forms.textareaField({
+    label: "Send Message To:"|t,
+    required: true,
+    id: 'to',
+    name: 'to',
+    instructions: "The SMS-capable phone numbers for which you would like to receive the notifications, including country code. <strong>One number per line. You must have a paid Twilio subscription to send messages to numbers that aren't registered in your Twilio account.</strong>"|t,
+    value: settings.to,
+    placeholder: '+12345556789',
+    rows: 4,
+    errors: settings.getErrors('to')
+  })
+}}
+
+{{
+  forms.textField({
+    label: "Message prefix:"|t,
+    id: 'msgPrefix',
+    name: 'msgPrefix',
+    instructions: "Optional value to prepend to the user’s message."|t,
+    value: settings.msgPrefix,
+    errors: settings.getErrors('msgPrefix')
+  })
+}}
+
+{{
+  forms.textField({
+    label: "Message postfix:"|t,
+    id: 'msgPostfix',
+    name: 'msgPostfix',
+    instructions: "Optional value to append to the user’s message."|t,
+    value: settings.msgPostfix,
+    errors: settings.getErrors('msgPostfix')
+  })
+}}
+
+{{
+  forms.textField({
+    label: "SID:"|t,
+    required: true,
+    id: 'sid',
+    name: 'sid',
+    instructions: "Your Twilio SID."|t,
+    value: settings.sid,
+    errors: settings.getErrors('sid')
+  })
+}}
+
+{{
+  forms.textField({
+    label: "Auth token:"|t,
+    required: true,
+    id: 'authToken',
+    name: 'authToken',
+    instructions: "Your Twilio Auth Token."|t,
+    value: settings.authToken,
+    errors: settings.getErrors('authToken')
+  })
+}}
+
+{{
+  forms.radioGroupField({
+    label: "Action after sending SMS:"|t,
+    required: true,
+    instructions: "You can choose to use AJAX or redirect to a URL (such as a 'Thank You' page) once the user submits an SMS message."|t,
+    name: 'ajaxOrRedirect',
+    options:{ "ajax": "AJAX", "redirect": "Redirect"},
+    default: 'ajax',
+    value: settings.ajaxOrRedirect,
+    errors: settings.getErrors('ajaxOrRedirect')
+  })
+}}
+
+{{
+  forms.textField({
+    label: "Redirect to:"|t,
+    id: 'redirect',
+    name: 'redirect',
+    instructions: "The page you'd like to redirect the user to once the SMS is sent. Only valid if 'Redirect' is selected above."|t,
+    value: settings.redirect,
+    errors: settings.getErrors('redirect')
+  })
+}}
+
+{{
+  forms.textField({
+    label: "Success message:"|t,
+    required: true,
+    id: 'successMsg',
+    name: 'successMsg',
+    instructions: "The message to show when the text was sent successfully (AJAX)."|t,
+    value: settings.successMsg ?? "Success!",
+    errors: settings.getErrors('successMsg')
+  })
+}}
+
+{{
+  forms.textField({
+    label: "Number required:"|t,
+    required: true,
+    id: 'numberMissingMsg',
+    name: 'numberMissingMsg',
+    instructions: "The error message to show when the user submits the form without providing a number."|t,
+    value: settings.numberMissingMsg ?? "Phone number is required.",
+    errors: settings.getErrors('numberMissingMsg')
+  })
+}}
+
+{{
+  forms.textField({
+    label: "Number too short:"|t,
+    required: true,
+    id: 'numberShortMsg',
+    name: 'numberShortMsg',
+    instructions: "The error message to show when the number provided was too short."|t,
+    value: settings.numberShortMsg ?? "The phone number provided was too short.",
+    errors: settings.getErrors('numberShortMsg')
+  })
+}}
+
+{{
+  forms.textField({
+    label: "Number invalid:"|t,
+    required: true,
+    id: 'numberInvalidMsg',
+    name: 'numberInvalidMsg',
+    instructions: "The error message to show when the number provided was invalid (such as non-numeric)."|t,
+    value: settings.numberInvalidMsg ?? "The number provided appears to be invalid",
+    errors: settings.getErrors('numberInvalidMsg')
+  })
+}}
+
+{{
+  forms.textField({
+    label: "Message required:"|t,
+    required: true,
+    id: 'messageMissingMsg',
+    name: 'messageMissingMsg',
+    instructions: "The error message to show when the using did not fill out the message field."|t,
+    value: settings.messageMissingMsg ?? "You must fill out a message to send.",
+    errors: settings.getErrors('messageMissingMsg')
+  })
+}}
+
+<div id="test-sms-status" style="margin-bottom: 15px"></div>
+<input type="submit" class="btn submit" value="Save" />
+<input type="button" id="sms-test" class="btn" value="Send a test text" />
