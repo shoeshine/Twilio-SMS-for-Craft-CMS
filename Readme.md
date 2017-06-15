@@ -1,12 +1,12 @@
 ## Installing ##
 
- 1. Extract `twilio-sms-craft-2.zip` and copy the `/twiliosms` folder to your `/craft/plugins` folder
+ 1. Copy the `/twiliosms` folder to your `/craft/plugins` folder
  2. Navigate to Settings > Plugins in the Craft admin
- 3. Enable the Twilio SMS Plugin
+ 3. Enable the Twilio SMS plugin
 
 ## Configuring ##
 
- 1. Navigate to the plugins' settings page (the cog icon)
+ 1. Navigate to the plugin settings page
  2. Input your Twilio Number (the one assigned to you from Twilio). This number *must* include the country code and not have any spaces.
  3. **Send Message To:** your SMS-capable phone number, beginning with the country code. You may add as many numbers as you like (one per line); all numbers added must be added to, and verified in, your Twilio account unless you have a **paid** Twilio subscription. Numbers should not include spaces.
  4. **Message prefix:** an optional field if you'd like to add a custom prefix to all messages sent via the plugin.
